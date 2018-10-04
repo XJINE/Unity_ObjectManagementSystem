@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 
-// NOTE:
-// By using "T(Data)", we can divide the manager logic(code) and the others.
-
 namespace ObjectManagementSystem
 {
     public class SampleObjectPainter : MonoBehaviour

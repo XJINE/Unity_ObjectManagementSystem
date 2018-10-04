@@ -9,8 +9,6 @@ namespace ObjectManagementSystem
     {
         #region Field
 
-        public ObjectManager<T> manager;
-
         public bool spawn;
 
         public Transform objectParent;

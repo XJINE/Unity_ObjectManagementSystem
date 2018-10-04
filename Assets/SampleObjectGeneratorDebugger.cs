@@ -12,8 +12,6 @@ namespace ObjectManagementSystem
 
         public KeyCode removeAllKey = KeyCode.Delete;
 
-        public int generateCount = 1;
-
         #endregion Field
 
         #region Property
@@ -35,12 +33,9 @@ namespace ObjectManagementSystem
 
         protected virtual void Update()
         {
-            if (Input.GetKeyDown(generateKey))
+            if (Input.GetKeyDown(this.generateKey))
             {
-                for (int i = 0; i < this.generateCount; i++)
-                {
-                    this.ObjectGenerator.GenerateRandom<SampleManagedObject>(Vector3.zero);
-                }
+                this.ObjectGenerator.GenerateRandom<SampleManagedObject>(Vector3.zero);
             }
             if (Input.GetKeyDown(this.removeAllKey))
             {
