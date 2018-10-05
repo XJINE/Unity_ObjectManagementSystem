@@ -35,19 +35,16 @@ namespace ObjectManagementSystem
             }
         }
 
-        public virtual bool Initialize(ObjectManager<T> objectManager, T data)
+        public virtual void Initialize(ObjectManager<T> objectManager, T data)
         {
             // NOTE:
             // Called once from ObjectManager<T>.
 
-            if (this.ObjectManager == null && this.Data == null)
+            if (this.ObjectManager == null)
             {
                 this.ObjectManager = objectManager;
                 this.Data = data;
-                return true;
             }
-
-            return false;
         }
 
         public virtual void ReleaseFromManager()

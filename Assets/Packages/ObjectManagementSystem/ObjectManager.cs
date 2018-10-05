@@ -49,18 +49,17 @@ namespace ObjectManagementSystem
             Initialize();
         }
 
-        public virtual bool Initialize()
+        public virtual void Initialize()
         {
             if (this.isInitialized)
             {
-                return false;
+                return;
             }
 
             this.managedObjects = new List<ManagedObject<T>>();
             this.ManagedObjects = new ReadOnlyCollection<ManagedObject<T>>(this.managedObjects);
-            this.isInitialized = true;
 
-            return true;
+            this.isInitialized = true;
         }
 
         public virtual U AddManagedObject<U>(GameObject gameObject) where U : ManagedObject<T>
