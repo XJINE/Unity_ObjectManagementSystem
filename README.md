@@ -46,7 +46,7 @@ And when ``OnDestroy()`` called, the ``ObjectManager`` will remove the reference
 You can pass a any data to each ``ManagedObject`` and referenct it as you like.
 By using "T(Data)", it is able to divide manage logic(code) and the others.
 
-To use ``T Data``, have to implement abstract method ``ObjectManager.ReturnManagedObjectData()``.
+To use ``T Data``, have to implement abstract method ``ObjectManager.InitializeManagedObjectData()``.
 
 ### ObjectGenerator
 
@@ -71,7 +71,7 @@ public class SampleManagedObject : ManagedObject<SampleObjectBehaviour>{}
 
 public class SampleObjectManager : ObjectManager<SampleObjectBehaviour>
 {
-    protected override SampleObjectBehaviour ReturnManagedObjectData(GameObject managedGameObject)
+    protected override SampleObjectBehaviour InitializeManagedObjectData(GameObject managedGameObject)
     {
         return managedGameObject.GetComponent<SampleObjectBehaviour>();
     }
