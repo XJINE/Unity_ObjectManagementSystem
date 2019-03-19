@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace ObjectManagementSystem
 {
-    public abstract class ObjectManager<T> : MonoBehaviour, IInitializable
+    public class ObjectManager<T> : MonoBehaviour, IInitializable
     {
         #region Property
 
@@ -63,7 +63,7 @@ namespace ObjectManagementSystem
             return true;
         }
 
-        public virtual U AddManagedObject<U>(GameObject gameObject) where U : ManagedObject<T>
+        public virtual U AddManagedObject<U> (GameObject gameObject) where U : ManagedObject<T>
         {
             if (this.IsFilled)
             {
@@ -71,8 +71,8 @@ namespace ObjectManagementSystem
             }
 
             U managedObject = gameObject.AddComponent(typeof(U)) as U;
-              managedObject.ObjectManager = this;
-              managedObject.Initialize();
+            managedObject.ObjectManager = this;
+            managedObject.Initialize();
 
             this.managedObjects.Add(managedObject);
 

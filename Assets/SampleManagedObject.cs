@@ -1,6 +1,3 @@
-﻿namespace ObjectManagementSystem
-{
-    public class SampleManagedObject : ManagedObject<SampleObjectBehaviour>
-    {
-    }
-}
+﻿using ObjectManagementSystem;
+
+public class SampleManagedObject : ManagedObject<SampleObjectBehaviour> { }

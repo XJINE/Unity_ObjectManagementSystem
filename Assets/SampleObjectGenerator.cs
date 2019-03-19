@@ -1,8 +1,3 @@
-﻿using UnityEngine;
+﻿using ObjectManagementSystem;
 
-namespace ObjectManagementSystem
-{
-    public class SampleObjectGenerator : ObjectGenerator<SampleObjectBehaviour>
-    {
-    }
-}
+public class SampleObjectGenerator : ObjectGenerator<SampleObjectBehaviour> { }
