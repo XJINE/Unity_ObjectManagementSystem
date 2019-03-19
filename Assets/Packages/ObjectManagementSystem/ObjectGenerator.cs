@@ -39,7 +39,7 @@ namespace ObjectManagementSystem
         public virtual GameObject Generate<U>
         (int objectIndex, Vector3 position, Vector3? rotation = null, Vector3? scale = null) where U : ManagedObject<T>
         {
-            if (this.ObjectManager.CheckManagedObjectCountIsMax())
+            if (this.ObjectManager.ManagedCountIsMax())
             {
                 return null;
             }

@@ -2,19 +2,16 @@
 
 namespace ObjectManagementSystem
 {
-    public class ManagedObject<T> : MonoBehaviour
+    public class ManagedObject<T> : MonoBehaviour, IInitializable
     {
         #region Property
 
+        protected ObjectManager<T> objectManager;
+
         public ObjectManager<T> ObjectManager
         {
-            get;
-            protected set;
-        }
-
-        public bool IsManaged
-        {
-            get { return this.ObjectManager != null; }
+            get { return this.objectManager; }
+            set { if (!this.IsInitialized) { this.objectManager = value; } }
         }
 
         public T Data
@@ -23,33 +20,38 @@ namespace ObjectManagementSystem
             protected set;
         }
 
+        public bool IsInitialized
+        {
+            get; protected set;
+        }
+
         #endregion Property
 
         #region Method
 
         protected virtual void OnDestroy()
         {
-            if (this.IsManaged)
+            // CAUTION:
+            // ManagedObject might be removed from the outside of the ObjectManager.
+
+            if (this.objectManager != null)
             {
-                this.ObjectManager.ReleaseManagedObject(this, true);
+                this.objectManager.ReleaseManagedObject(this);
             }
         }
 
-        public virtual void Initialize(ObjectManager<T> objectManager, T data)
+        public virtual bool Initialize()
         {
-            // NOTE:
-            // Called once from ObjectManager<T>.
-
-            if (this.ObjectManager == null)
+            if (this.IsInitialized)
             {
-                this.ObjectManager = objectManager;
-                this.Data = data;
+                return false;
             }
-        }
 
-        public virtual void ReleaseFromManager()
-        {
-            GameObject.Destroy(this);
+            this.IsInitialized = true;
+
+            this.Data = base.GetComponent<T>();
+
+            return true;
         }
 
         #endregion Method
