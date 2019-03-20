@@ -1,3 +1,3 @@
 ﻿using ObjectManagementSystem;
 
-public class SampleObjectManager : ObjectManager<SampleManagedObject> { }
+public class SampleObjectManager : ObjectManager<SampleObjectBehaviour> { }

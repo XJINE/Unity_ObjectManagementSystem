@@ -7,7 +7,7 @@ namespace ObjectManagementSystem
     // ObjectManager<> is able to use without ObjectGenerator<>.
 
     [RequireComponent(typeof(ObjectManager<>))]
-    public class ObjectGenerator<T> : MonoBehaviour where T : ManagedObject<T>
+    public class ObjectGenerator<T> : MonoBehaviour
     {
         #region Field
 
@@ -32,7 +32,7 @@ namespace ObjectManagementSystem
             this.ObjectManager = base.GetComponent<ObjectManager<T>>();
         }
 
-        public virtual T Generate(int index)
+        public virtual U Generate<U>(int index) where U : ManagedObject<T>
         {
             if (this.ObjectManager.IsFilled)
             {
@@ -41,7 +41,7 @@ namespace ObjectManagementSystem
 
             GameObject generatedObject = GameObject.Instantiate(this.objects[index]);
 
-            return this.ObjectManager.AddManagedObject(generatedObject);
+            return this.ObjectManager.AddManagedObject<U>(generatedObject);
         }
 
         #endregion Method

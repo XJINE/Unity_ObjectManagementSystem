@@ -18,7 +18,8 @@ public class Sample : MonoBehaviour
     {
         if (Input.GetKeyDown(this.generateKey))
         {
-            this.objectGenerator.Generate(Random.Range(0, this.objectGenerator.objects.Length));
+            var managedObject = this.objectGenerator.Generate<SampleManagedObject>
+                                (Random.Range(0, this.objectGenerator.objects.Length));
         }
 
         if (Input.GetKeyDown(this.removeKey))
@@ -30,7 +31,7 @@ public class Sample : MonoBehaviour
         {
             foreach (var managedObject in this.objectGenerator.ObjectManager.ManagedObjects)
             {
-                managedObject.SetColor(this.paintColors[Random.Range(0, this.paintColors.Length)]);
+                managedObject.Data.SetColor(this.paintColors[Random.Range(0, this.paintColors.Length)]);
             }
         }
     }
