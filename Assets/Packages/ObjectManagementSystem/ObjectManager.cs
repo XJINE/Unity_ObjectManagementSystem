@@ -4,13 +4,13 @@ using System.Collections.ObjectModel;
 
 namespace ObjectManagementSystem
 {
-    public class ObjectManager<T> : MonoBehaviour, IInitializable
+    public class ObjectManager<T> : MonoBehaviour, IInitializable where T : ManagedObject<T>
     {
         #region Property
 
-        protected List<ManagedObject<T>> managedObjects;
+        protected List<T> managedObjects;
 
-        public ReadOnlyCollection<ManagedObject<T>> ManagedObjects
+        public ReadOnlyCollection<T> ManagedObjects
         {
             private set;
             get;
@@ -57,29 +57,28 @@ namespace ObjectManagementSystem
             
             this.IsInitialized = true;
 
-            this.managedObjects = new List<ManagedObject<T>>();
-            this.ManagedObjects = new ReadOnlyCollection<ManagedObject<T>>(this.managedObjects);
+            this.managedObjects = new List<T>();
+            this.ManagedObjects = new ReadOnlyCollection<T>(this.managedObjects);
 
             return true;
         }
 
-        public virtual U AddManagedObject<U> (GameObject gameObject) where U : ManagedObject<T>
+        public virtual T AddManagedObject(GameObject gameObject)
         {
             if (this.IsFilled)
             {
                 return null;
             }
 
-            U managedObject = gameObject.AddComponent(typeof(U)) as U;
-            managedObject.ObjectManager = this;
-            managedObject.Initialize();
+            T managedObject = gameObject.AddComponent(typeof(T)) as T;
+            managedObject.Register(this);
 
             this.managedObjects.Add(managedObject);
 
             return managedObject;
         }
 
-        public virtual void ReleaseManagedObject(ManagedObject<T> managedObject)
+        public virtual void ReleaseManagedObject(T managedObject)
         {
             if (this.IsManage(managedObject))
             {
@@ -104,7 +103,7 @@ namespace ObjectManagementSystem
             }
         }
 
-        public virtual void RemoveManagedObject(ManagedObject<T> managedObject)
+        public virtual void RemoveManagedObject(T managedObject)
         {
             if (this.IsManage(managedObject))
             {
@@ -144,7 +143,7 @@ namespace ObjectManagementSystem
             }
         }
 
-        public bool IsManage(ManagedObject<T> managedObject)
+        public bool IsManage(T managedObject)
         {
             return managedObject.ObjectManager == this;
         }

@@ -2,28 +2,11 @@
 
 namespace ObjectManagementSystem
 {
-    public class ManagedObject<T> : MonoBehaviour, IInitializable
+    public class ManagedObject<T> : MonoBehaviour where T : ManagedObject<T>
     {
         #region Property
 
-        protected ObjectManager<T> objectManager;
-
-        public ObjectManager<T> ObjectManager
-        {
-            get { return this.objectManager; }
-            set { if (!this.IsInitialized) { this.objectManager = value; } }
-        }
-
-        public T Data
-        {
-            get;
-            protected set;
-        }
-
-        public bool IsInitialized
-        {
-            get; protected set;
-        }
+        public ObjectManager<T> ObjectManager { get; protected set; }
 
         #endregion Property
 
@@ -34,22 +17,20 @@ namespace ObjectManagementSystem
             // CAUTION:
             // ManagedObject might be removed from the outside of the ObjectManager.
 
-            if (this.objectManager != null)
+            if (this.ObjectManager != null)
             {
-                this.objectManager.ReleaseManagedObject(this);
+                this.ObjectManager.ReleaseManagedObject((T)this);
             }
         }
 
-        public virtual bool Initialize()
+        public bool Register(ObjectManager<T> objectManager)
         {
-            if (this.IsInitialized)
+            if (this.ObjectManager != null)
             {
                 return false;
             }
 
-            this.IsInitialized = true;
-
-            this.Data = base.GetComponent<T>();
+            this.ObjectManager = objectManager;
 
             return true;
         }

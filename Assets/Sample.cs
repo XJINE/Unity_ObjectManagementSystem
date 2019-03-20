@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using ObjectManagementSystem;
 
 public class Sample : MonoBehaviour
 {
     #region Field
 
-    private ObjectGenerator<SampleObjectBehaviour> objectGenerator;
+    public SampleObjectGenerator objectGenerator;
 
     public Color[] paintColors = new Color[] { Color.red, Color.blue, Color.green };
 
@@ -15,16 +14,11 @@ public class Sample : MonoBehaviour
 
     #endregion Field
 
-    void Awake()
-    {
-        this.objectGenerator = GetComponent<ObjectGenerator<SampleObjectBehaviour>>();
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(this.generateKey))
         {
-            this.objectGenerator.Generate<SampleManagedObject>(Random.Range(0, this.objectGenerator.objects.Length), Vector3.zero);
+            this.objectGenerator.Generate(Random.Range(0, this.objectGenerator.objects.Length), Vector3.zero);
         }
 
         if (Input.GetKeyDown(this.removeKey))
@@ -36,7 +30,7 @@ public class Sample : MonoBehaviour
         {
             foreach (var managedObject in this.objectGenerator.ObjectManager.ManagedObjects)
             {
-                managedObject.Data.SetColor(this.paintColors[Random.Range(0, this.paintColors.Length)]);
+                managedObject.SetColor(this.paintColors[Random.Range(0, this.paintColors.Length)]);
             }
         }
     }
