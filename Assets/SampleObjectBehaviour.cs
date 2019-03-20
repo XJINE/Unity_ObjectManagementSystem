@@ -2,6 +2,10 @@
 
 public class SampleObjectBehaviour : MonoBehaviour
 {
+    // NOTE:
+    // If you want to get a reference to the other ManagedObjects,
+    // use GetComponent<SampleManagedObject>().ObjectManager.
+
     #region Field
 
     protected float moveSpeed;
@@ -17,7 +21,7 @@ public class SampleObjectBehaviour : MonoBehaviour
         this.moveSpeed = Random.Range(1f, 3f);
         this.animSpeed = Random.Range(1f, 3f);
 
-        UpdateTargetPosition();
+        UpdateTarget();
 
         Destroy(base.gameObject, Random.Range(3f, 15f));
     }
@@ -31,15 +35,11 @@ public class SampleObjectBehaviour : MonoBehaviour
 
         if (this.transform.position == this.target)
         {
-            UpdateTargetPosition();
+            UpdateTarget();
         }
-
-        // NOTE:
-        // ManagedObject is able to access the other managed objects.
-        // base.ObjectManager.ManagedObjects;
     }
 
-    private void UpdateTargetPosition()
+    private void UpdateTarget()
     {
         this.target = Random.onUnitSphere * 5;
     }
