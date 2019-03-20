@@ -18,7 +18,7 @@ public class Sample : MonoBehaviour
     {
         if (Input.GetKeyDown(this.generateKey))
         {
-            this.objectGenerator.Generate(Random.Range(0, this.objectGenerator.objects.Length), Vector3.zero);
+            this.objectGenerator.Generate(Random.Range(0, this.objectGenerator.objects.Length));
         }
 
         if (Input.GetKeyDown(this.removeKey))

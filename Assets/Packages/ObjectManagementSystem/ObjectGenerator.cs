@@ -11,8 +11,6 @@ namespace ObjectManagementSystem
     {
         #region Field
 
-        public Transform objectParent;
-
         public GameObject[] objects;
 
         #endregion Field
@@ -34,10 +32,7 @@ namespace ObjectManagementSystem
             this.ObjectManager = base.GetComponent<ObjectManager<T>>();
         }
 
-        public virtual GameObject Generate(int      index,
-                                           Vector3  position,
-                                           Vector3? rotation = null,
-                                           Vector3? scale    = null)
+        public virtual T Generate(int index)
         {
             if (this.ObjectManager.IsFilled)
             {
@@ -46,15 +41,7 @@ namespace ObjectManagementSystem
 
             GameObject generatedObject = GameObject.Instantiate(this.objects[index]);
 
-            Transform transform  = generatedObject.transform;
-            transform.position   = position;
-            transform.rotation   = rotation == null ? transform.rotation   : Quaternion.Euler((Vector3)rotation);
-            transform.localScale = scale    == null ? transform.localScale : (Vector3)scale;
-            transform.parent     = this.objectParent;
-
-            this.ObjectManager.AddManagedObject(generatedObject);
-
-            return generatedObject;
+            return this.ObjectManager.AddManagedObject(generatedObject);
         }
 
         #endregion Method
