@@ -4,7 +4,7 @@ public class SampleObjectBehaviour : MonoBehaviour
 {
     // NOTE:
     // If you want to get a reference to the other ManagedObjects,
-    // use GetComponent<SampleManagedObject>().ObjectManager.
+    // use GetComponent<SampleManagedObject>().Manager.
 
     #region Field
 

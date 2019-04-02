@@ -216,7 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32150d84bd5b98549b5b9052f7a57937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectParent: {fileID: 391445503}
   objects:
   - {fileID: 1000011003231624, guid: d7e4d19df25918945bed74ec15025c8f, type: 3}
   - {fileID: 1000010964372962, guid: 0ce97856ade892e4287e1483087d4346, type: 3}
@@ -246,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caec38a9a9cee5e4d83f5e835fe450fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCount: 100
+  maxCount: 15
 --- !u!114 &391445505
 MonoBehaviour:
   m_ObjectHideFlags: 0
