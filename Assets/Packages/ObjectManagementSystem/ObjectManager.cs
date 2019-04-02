@@ -69,8 +69,7 @@ namespace ObjectManagementSystem
             }
 
             var managedObject = gameObject.AddComponent(typeof(MANAGED_OBJECT)) as MANAGED_OBJECT;
-
-            managedObject.Manager = this;
+                managedObject.Manager = this;
 
             this.managedObjects.Add(managedObject);
 
