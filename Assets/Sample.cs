@@ -24,7 +24,7 @@ public class Sample : MonoBehaviour
 
         if (Input.GetKeyDown(this.removeKey))
         {
-            foreach (var managedObject in this.objectGenerator.ObjectManager.ManagedObjects)
+            foreach (var managedObject in this.objectGenerator.Manager.ManagedObjects)
             {
                 GameObject.Destroy(managedObject.gameObject);
             }
@@ -32,7 +32,7 @@ public class Sample : MonoBehaviour
 
         if (Input.GetKeyDown(this.paintKey))
         {
-            foreach (var managedObject in this.objectGenerator.ObjectManager.ManagedObjects)
+            foreach (var managedObject in this.objectGenerator.Manager.ManagedObjects)
             {
                 managedObject.Data.SetColor(this.paintColors[Random.Range(0, this.paintColors.Length)]);
             }
@@ -45,7 +45,7 @@ public class Sample : MonoBehaviour
         GUILayout.Label("Press " + this.removeKey   + " to Remove All of the Object.");
         GUILayout.Label("Press " + this.paintKey    + " to Paint All of the Object.");
 
-        GUILayout.Label("Object Count : " + this.objectGenerator.ObjectManager.ManagedObjects.Count
-                                  + " / " + this.objectGenerator.ObjectManager.maxCount);
+        GUILayout.Label("Object Count : " + this.objectGenerator.Manager.ManagedObjects.Count
+                                  + " / " + this.objectGenerator.Manager.maxCount);
     }
 }

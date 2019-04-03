@@ -17,7 +17,7 @@ namespace ObjectManagementSystem
 
         #region Property
 
-        public ObjectManager<DATA> ObjectManager 
+        public ObjectManager<DATA> Manager 
         {
             get;
             protected set;
@@ -29,20 +29,20 @@ namespace ObjectManagementSystem
 
         public virtual void Awake()
         {
-            this.ObjectManager = base.GetComponent<ObjectManager<DATA>>();
+            this.Manager = base.GetComponent<ObjectManager<DATA>>();
         }
 
         public virtual MANAGED_OBJECT Generate<MANAGED_OBJECT>(int index)
                  where MANAGED_OBJECT : ManagedObject<DATA>
         {
-            if (this.ObjectManager.IsFilled)
+            if (this.Manager.IsFilled)
             {
                 return null;
             }
 
             GameObject generatedObject = GameObject.Instantiate(this.objects[index]);
 
-            return this.ObjectManager.AddManagedObject<MANAGED_OBJECT>(generatedObject);
+            return this.Manager.AddManagedObject<MANAGED_OBJECT>(generatedObject);
         }
 
         #endregion Method
