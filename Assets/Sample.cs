@@ -4,7 +4,7 @@ public class Sample : MonoBehaviour
 {
     #region Field
 
-    public SampleObjectGenerator objectGenerator;
+    public SampleObjectGenerator generator;
 
     public Color[] paintColors = new Color[] { Color.red, Color.blue, Color.green };
 
@@ -14,17 +14,19 @@ public class Sample : MonoBehaviour
 
     #endregion Field
 
+    #region Method
+
     void Update()
     {
         if (Input.GetKeyDown(this.generateKey))
         {
-            var managedObject = this.objectGenerator.Generate<SampleManagedObject>
-                                (Random.Range(0, this.objectGenerator.objects.Length));
+            var managedObject = this.generator.Generate<SampleManagedObject>
+                                (Random.Range(0, this.generator.objects.Length));
         }
 
         if (Input.GetKeyDown(this.removeKey))
         {
-            foreach (var managedObject in this.objectGenerator.Manager.ManagedObjects)
+            foreach (var managedObject in this.generator.Manager.ManagedObjects)
             {
                 GameObject.Destroy(managedObject.gameObject);
             }
@@ -32,7 +34,7 @@ public class Sample : MonoBehaviour
 
         if (Input.GetKeyDown(this.paintKey))
         {
-            foreach (var managedObject in this.objectGenerator.Manager.ManagedObjects)
+            foreach (var managedObject in this.generator.Manager.ManagedObjects)
             {
                 managedObject.Data.SetColor(this.paintColors[Random.Range(0, this.paintColors.Length)]);
             }
@@ -41,11 +43,13 @@ public class Sample : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Label("Press " + this.generateKey + " to Add New Object.");
-        GUILayout.Label("Press " + this.removeKey   + " to Remove All of the Object.");
-        GUILayout.Label("Press " + this.paintKey    + " to Paint All of the Object.");
+        GUILayout.Label("Press " + this.generateKey + " to Add a New Object.");
+        GUILayout.Label("Press " + this.removeKey   + " to Remove All Objects.");
+        GUILayout.Label("Press " + this.paintKey    + " to Paint All Objects.");
 
-        GUILayout.Label("Object Count : " + this.objectGenerator.Manager.ManagedObjects.Count
-                                  + " / " + this.objectGenerator.Manager.maxCount);
+        GUILayout.Label("Object Count : " + this.generator.Manager.ManagedObjects.Count
+                                  + " / " + this.generator.Manager.maxCount);
     }
+
+    #endregion Method
 }
